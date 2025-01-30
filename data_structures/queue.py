@@ -26,14 +26,17 @@ class Queue:
             if not self.rear:
                 self.rear = new_node
             return
+        
         temp = self.front
         count = 0
         while temp and count < position - 1:
             temp = temp.next
             count += 1
-        if not temp:
+        
+        if temp is None:
             print_arabic("الموضع غير صالح!")
             return
+        
         new_node.next = temp.next
         temp.next = new_node
         if new_node.next is None:
@@ -51,19 +54,23 @@ class Queue:
         if self.front is None:
             print_arabic("الطابور فارغ!")
             return
+        
         if position == 0:
             self.front = self.front.next
             if not self.front:
                 self.rear = None
             return
+        
         temp = self.front
         count = 0
         while temp and count < position - 1:
             temp = temp.next
             count += 1
-        if not temp or not temp.next:
+        
+        if temp is None or temp.next is None:
             print_arabic("الموضع غير صالح!")
             return
+        
         temp.next = temp.next.next
         if temp.next is None:
             self.rear = temp
@@ -74,6 +81,6 @@ class Queue:
             return
         temp = self.front
         while temp:
-            print(temp.data, end=" -> ")
+            print(temp.data, end=" -> " if temp.next else "")
             temp = temp.next
-        print("None")
+        print()
